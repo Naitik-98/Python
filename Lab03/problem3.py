@@ -1,5 +1,5 @@
 base = int(input("Enter base: "))
-power = int(input("Enter exponent: "))
+power = int(input("Enter exponent/power: "))
 
 result = 1
 
