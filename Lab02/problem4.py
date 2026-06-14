@@ -1,6 +1,6 @@
-ch = input("Enter a character: ").lower()
+ch = input("Enter a character: ")
 
-if ch in ['a', 'e', 'i', 'o', 'u']:
-    print("Vowel")
+if ch in ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']:
+    print("Is A Vowel")
 else:
-    print("Not a Vowel")
+    print("Is Not a Vowel")
