@@ -1,18 +1,18 @@
-marks = float(input("Enter marks: "))
+marks = (input("Enter marks: "))
 
 if marks >= 90:
     grade = "A+"
-elif marks >= 85:
-    grade = "A"
 elif marks >= 80:
-    grade = "B+"
+    grade = "A"
 elif marks >= 75:
-    grade = "B"
+    grade = "B+"
 elif marks >= 70:
-    grade = "C+"
+    grade = "B"
 elif marks >= 65:
-    grade = "C"
+    grade = "C+"
 elif marks >= 60:
+    grade = "C"
+elif marks >= 55:
     grade = "D+"
 elif marks >= 50:
     grade = "D"
