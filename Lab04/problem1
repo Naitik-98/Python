@@ -1,4 +1,4 @@
-string = "welcome .py"
+string = input("Enter a string: ")
 
 words = string.split()
 reversed_words = [word[::-1] for word in words]
