@@ -7,3 +7,4 @@ for i in range(power):
     result *= base
 
 print("Result =", result)
+
