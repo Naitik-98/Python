@@ -1,0 +1,3 @@
+Name: Naitik Mandal
+ID: 22-47630-2
+PROGRAMMING IN PYTHON {Sec:B}
