@@ -20,7 +20,6 @@ class BankAccount:
         print(f"Current Balance: {self.balance}")
 
 
-# Driver Code
 account = BankAccount("123456789", 5000, "02-08-2026", "Naitik")
 
 account.check_balance()
