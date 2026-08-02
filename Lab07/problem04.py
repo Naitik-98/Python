@@ -1,13 +1,10 @@
 try:
-    # Create and Write
     with open("sample.txt", "w") as file:
         file.write("Hello Python\n")
 
-    # Append
     with open("sample.txt", "a") as file:
         file.write("Welcome to AIUB Python Lab.\n")
 
-    # Read
     with open("sample.txt", "r") as file:
         content = file.read()
 
