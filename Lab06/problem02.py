@@ -13,7 +13,6 @@ class Bus(Vehicle):
         return total_fare + (total_fare * 0.10)
 
 
-# Driver Code
 bus = Bus("AIUB Bus", 40)
 
 print("Vehicle Name:", bus.name)
