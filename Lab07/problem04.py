@@ -1,9 +1,9 @@
 try:
     with open("sample.txt", "w") as file:
-        file.write("Hello Python\n")
+        file.write("Holla\n")
 
     with open("sample.txt", "a") as file:
-        file.write("Welcome to AIUB Python Lab.\n")
+        file.write("Hello\n")
 
     with open("sample.txt", "r") as file:
         content = file.read()
