@@ -1,0 +1,405 @@
+Yes. Since Sir wants a Jupyter Notebook, the cleanest submission is to have Markdown cells explaining each problem and code cells underneath them. I’d structure Lab 8 like this.
+
+The explanations below follow the Lab 08 topics and problem structure in your manual. 
+
+Markdown Cell 1
+
+# Lab 08: Pandas
+
+## Course: CSC 4162 - Programming in Python
+
+### Topic
+Pandas
+
+Pandas is a Python library used for data analysis and data manipulation.
+It provides useful data structures such as Series and DataFrame.
+
+In this lab, we will work with Pandas Series, DataFrames, CSV files,
+and perform data cleaning on the Titanic dataset.
+
+Code Cell 1
+
+import pandas as pd
+
+
+---
+
+Markdown Cell 2
+
+## Problem 1: Pandas Series
+
+Create a Pandas Series using the given calorie data and find the
+summation of all calories.
+
+The data contains the calories for three days:
+- day1 = 420
+- day2 = 380
+- day3 = 390
+
+Code Cell 2
+
+calories = {
+    "day1": 420,
+    "day2": 380,
+    "day3": 390
+}
+
+s = pd.Series(calories)
+
+print(s)
+print("Total calories:", s.sum())
+
+
+---
+
+Markdown Cell 3
+
+### Explanation
+
+A Pandas Series is a one-dimensional labeled data structure.
+
+Here, the dictionary keys become the labels of the Series and the
+dictionary values become the data.
+
+The `sum()` function calculates the total of all calorie values.
+
+
+---
+
+Markdown Cell 4
+
+## Problem 2: Pandas DataFrame
+
+Create a Pandas DataFrame using the given calories and duration data.
+
+Then select rows 0 and 2 using the `loc` attribute.
+
+Code Cell 3
+
+data = {
+    "calories": [420, 380, 390],
+    "duration": [50, 40, 45]
+}
+
+df = pd.DataFrame(data)
+
+print("Original DataFrame:")
+print(df)
+
+print("\nRows 0 and 2:")
+print(df.loc[[0, 2]])
+
+The manual specifically asks for rows 0 and 2 using loc. 
+
+Markdown Cell 5
+
+### Explanation
+
+A DataFrame is a two-dimensional data structure containing rows and
+columns.
+
+The `pd.DataFrame()` function creates a DataFrame from the given
+dictionary.
+
+The `loc` attribute is used to select rows and columns using their
+labels.
+
+Therefore, `df.loc[[0, 2]]` selects rows with labels 0 and 2.
+
+
+---
+
+Markdown Cell 6
+
+## Problem 3: Load and Analyze a CSV File
+
+In this problem, we load the Titanic dataset from a CSV file.
+
+The Excel dataset was first converted to `titanic.csv` so that it can
+be loaded using Pandas `read_csv()`.
+
+We will use the following functions to inspect the dataset:
+- `head()` - displays the first rows
+- `tail()` - displays the last rows
+- `info()` - displays information about columns, data types, and
+  non-null values
+
+The manual introduces CSV loading with read_csv() and the use of head(), tail(), and info(). 
+
+Code Cell 4
+
+titanic = pd.read_csv("titanic.csv")
+
+print(titanic.head())
+
+Markdown Cell 7
+
+### Display the Last Five Rows
+
+Code Cell 5
+
+print(titanic.tail())
+
+Markdown Cell 8
+
+### Display Dataset Information
+
+The `info()` function provides information about:
+- Number of entries
+- Column names
+- Non-null values
+- Data types
+- Memory usage
+
+Code Cell 6
+
+titanic.info()
+
+
+---
+
+Problem 4
+
+Markdown Cell 9
+
+## Problem 4: Titanic Dataset Cleaning
+
+The Titanic dataset may contain empty cells, incorrect data formats,
+incorrect values, and duplicate rows.
+
+In this problem, we will inspect the dataset and apply suitable
+data-cleaning techniques.
+
+The main cleaning steps are:
+1. Check for empty cells
+2. Handle missing values
+3. Check data formats
+4. Check for wrong data
+5. Remove duplicate rows
+
+This matches the four cleaning areas specified in the manual. 
+
+Markdown Cell 10
+
+### Step 1: Check for Empty Cells
+
+The `isnull().sum()` function counts the number of missing values
+in each column.
+
+Code Cell 7
+
+print(titanic.isnull().sum())
+
+Markdown Cell 11
+
+### Step 2: Fill Missing Age Values
+
+The `Age` column contains numerical values.
+
+We will replace missing Age values with the mean age of the dataset.
+
+The `fillna()` function is used to replace missing values.
+
+The manual itself demonstrates filling missing Age values using the mean. 
+
+Code Cell 8
+
+titanic["Age"] = titanic["Age"].fillna(titanic["Age"].mean())
+
+print("Missing Age values:", titanic["Age"].isnull().sum())
+
+
+---
+
+Markdown Cell 12
+
+### Step 3: Fill Missing Embarked Values
+
+`Embarked` is a categorical column.
+
+For a categorical column, we can replace a missing value with the
+most frequently occurring value, which is called the mode.
+
+Code Cell 9
+
+titanic["Embarked"] = titanic["Embarked"].fillna(
+    titanic["Embarked"].mode()[0]
+)
+
+print("Missing Embarked values:", titanic["Embarked"].isnull().sum())
+
+
+---
+
+Markdown Cell 13
+
+### Step 4: Fill Missing Cabin Values
+
+The Cabin column contains many missing values.
+
+Instead of deleting the rows, we will replace the missing cabin
+values with `"Unknown"`.
+
+This preserves the rows while indicating that the cabin information
+was not available.
+
+Code Cell 10
+
+titanic["Cabin"] = titanic["Cabin"].fillna("Unknown")
+
+print("Missing Cabin values:", titanic["Cabin"].isnull().sum())
+
+
+---
+
+Markdown Cell 14
+
+### Step 5: Check Data Types
+
+The `dtypes` attribute displays the data type of every column.
+
+This helps us identify columns that may have an incorrect format.
+
+Code Cell 11
+
+print(titanic.dtypes)
+
+Markdown Cell 15
+
+### Convert Age to Numeric Format
+
+The Age column should contain numerical values.
+
+The `pd.to_numeric()` function ensures that the column is treated as
+numeric data.
+
+The `errors="coerce"` option converts values that cannot be converted
+into numeric values to NaN.
+
+Code Cell 12
+
+titanic["Age"] = pd.to_numeric(
+    titanic["Age"],
+    errors="coerce"
+)
+
+print(titanic["Age"].dtype)
+
+
+---
+
+Markdown Cell 16
+
+### Step 6: Check for Wrong Data
+
+The `Survived` column should contain only two possible values:
+
+- 0 = Did not survive
+- 1 = Survived
+
+We will check whether any other values are present.
+
+Code Cell 13
+
+print("Unique Survived values:")
+print(titanic["Survived"].unique())
+
+invalid_survived = titanic[
+    ~titanic["Survived"].isin([0, 1])
+]
+
+print("\nInvalid Survived records:")
+print(invalid_survived)
+
+
+---
+
+Markdown Cell 17
+
+### Check Passenger Class
+
+The Pclass column represents passenger class.
+
+The valid passenger classes are 1, 2, and 3.
+
+We will check the unique values in this column.
+
+Code Cell 14
+
+print("Passenger class values:")
+print(titanic["Pclass"].unique())
+
+
+---
+
+Markdown Cell 18
+
+### Step 7: Check and Remove Duplicate Rows
+
+Duplicate rows can cause incorrect results during data analysis.
+
+The `duplicated()` function identifies duplicate rows.
+
+First, we check how many duplicate rows are present.
+
+Code Cell 15
+
+print("Number of duplicate rows:", titanic.duplicated().sum())
+
+Markdown Cell 19
+
+### Remove Duplicate Rows
+
+The `drop_duplicates()` function removes duplicate rows from the
+DataFrame.
+
+Code Cell 16
+
+titanic = titanic.drop_duplicates()
+
+print("Duplicate rows after cleaning:", titanic.duplicated().sum())
+
+
+---
+
+Markdown Cell 20
+
+## Final Cleaned Dataset
+
+Finally, we check the dataset again to make sure that the cleaning
+operations have been completed.
+
+We will check:
+- Missing values
+- Duplicate rows
+- First few rows of the cleaned dataset
+
+Code Cell 17
+
+print("Missing values after cleaning:")
+print(titanic.isnull().sum())
+
+print("\nDuplicate rows after cleaning:")
+print(titanic.duplicated().sum())
+
+print("\nFirst 10 rows of cleaned dataset:")
+print(titanic.head(10))
+
+Markdown Cell 21
+
+## Conclusion
+
+In this lab, we learned how to use Pandas for basic data analysis and
+data manipulation.
+
+We created a Pandas Series and DataFrame, selected rows using `loc`,
+loaded the Titanic dataset from a CSV file, and inspected the dataset
+using `head()`, `tail()`, and `info()`.
+
+We also performed data-cleaning operations by handling missing values,
+checking data types, checking for incorrect values, and removing
+duplicate rows.
+
+This gives you a proper notebook-style Lab 8: explanation → code → explanation → output, rather than just a collection of code cells.
+
+One correction from my previous version: for info(), use titanic.info() rather than print(titanic.info()); info() already prints its output and returns None.
